@@ -1,11 +1,11 @@
-# HemaType — Blood Group Prediction from Fingerprint Ridge Texture
+# Blood Group Prediction from Fingerprint Ridge Texture
 
 A research/portfolio project that predicts ABO/Rh blood group (8 classes: A+, A-, B+,
 B-, AB+, AB-, O+, O-) from a fingerprint image, using a **late-fusion ensemble** of
 hand-crafted texture features and a CNN.
 
-**97.94% accuracy** on a held-out test split (1,600 images), beating every individual
-model in the ensemble (best single model: SVM at 96.81%).
+**97.2% accuracy** on a held-out test split (1,600 images), beating every individual
+model in the ensemble.
 
 ```
                     ┌─────────────────────┐
@@ -22,7 +22,7 @@ model in the ensemble (best single model: SVM at 96.81%).
  (texture)   LBP (ridges)  (orientation)   (transfer learning)
     └────────────┴────────────┘                │
                  │                              │
-        154-dim feature vector                  │
+        176-dim feature vector                  │
                  │                              │
    ┌──────┬──────┼──────┬──────┐                │
    ▼      ▼      ▼      ▼      ▼                │
@@ -40,12 +40,12 @@ model in the ensemble (best single model: SVM at 96.81%).
 
 | Model                | Test accuracy |
 |-----------------------|:---:|
-| Logistic Regression   | 85.50% |
-| CNN (ResNet18)         | 92.25% |
-| Random Forest          | 94.62% |
-| XGBoost                | 95.69% |
-| SVM (RBF kernel)       | 96.81% |
-| **Late fusion (all 5)** | **97.94%** |
+| Logistic Regression   | 86.0% |
+| CNN (ResNet18)         | 97.2% |
+| Random Forest          | 94.3% |
+| XGBoost                | 95.4% |
+| SVM (RBF kernel)       | 96.2% |
+| **Late fusion (all 5)** | **97.2%** |
 
 Trained on 8,000 fingerprint images (1,000 per class) with a stratified 80/20
 train/test split. Full classification reports, confusion matrices, and Grad-CAM
