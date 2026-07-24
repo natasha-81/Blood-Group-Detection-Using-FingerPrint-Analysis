@@ -1,3 +1,4 @@
+--extra-index-url https://download.pytorch.org/whl/cpu
 flask==3.0.3
 flask-cors==4.0.1
 gunicorn==22.0.0
@@ -7,7 +8,7 @@ scikit-image==0.24.0
 scikit-learn==1.5.1
 xgboost==2.1.1
 joblib==1.4.2
-torch==2.3.1
-torchvision==0.18.1
+torch==2.3.1+cpu
+torchvision==0.18.1+cpu
 Pillow==10.4.0
 Werkzeug==3.0.3
