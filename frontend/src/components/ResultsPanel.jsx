@@ -15,7 +15,7 @@ export default function ResultsPanel({ result, error, loading }) {
   const id = useMemo(() => specimenId(result?.filename || result?.prediction), [result]);
 
   return (
-    <div className="panel">
+    <div className="result-panel">
       <div className="panel-title">
         <span>Analysis output</span>
         {result && <span>5-MODEL ENSEMBLE</span>}

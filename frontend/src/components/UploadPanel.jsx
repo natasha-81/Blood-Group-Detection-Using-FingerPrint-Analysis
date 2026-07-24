@@ -13,7 +13,7 @@ export default function UploadPanel({ file, previewUrl, onFile, onClear, onPredi
   };
 
   return (
-    <div className="panel">
+    <div className="upload-panel">
       <div className="panel-title">
         <span>Specimen input</span>
         <span>{file ? file.name : "AWAITING FILE"}</span>
