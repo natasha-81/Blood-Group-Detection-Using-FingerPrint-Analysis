@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import useCountUp from "../hooks/useCountUp.js";
 import ModelChart from "./ModelChart.jsx";
+import ConfidenceRing from "./ConfidenceRing.jsx";
 
 function specimenId(seed) {
   const n = Math.abs(
@@ -14,8 +15,10 @@ export default function ResultsPanel({ result, error, loading }) {
   const timestamp = useMemo(() => new Date(), [result]);
   const id = useMemo(() => specimenId(result?.filename || result?.prediction), [result]);
 
+  const modelEntries = result ? Object.entries(result.per_model) : [];
+
   return (
-    <div className="result-panel">
+    <div className="panel">
       <div className="panel-title">
         <span>Analysis output</span>
         {result && <span>5-MODEL ENSEMBLE</span>}
@@ -44,7 +47,7 @@ export default function ResultsPanel({ result, error, loading }) {
               <span className="result-group result-pop">{result.prediction}</span>
             </div>
             <div className="result-confidence-wrap">
-              <div className="result-confidence">{animatedConfidence.toFixed(1)}%</div>
+              <ConfidenceRing value={animatedConfidence} />
               <div className="result-confidence-label">fused confidence</div>
             </div>
           </div>
@@ -69,9 +72,23 @@ export default function ResultsPanel({ result, error, loading }) {
           <div className="per-model">
             <div className="panel-title" style={{ background: "transparent" }}>
               <span>Per-model votes</span>
-              <span>hover for detail</span>
+              <span>hover a chip for detail</span>
             </div>
-            <div className="panel-body" style={{ paddingTop: 8 }}>
+            <div className="panel-body" style={{ paddingTop: 0 }}>
+              <div className="model-chip-row">
+                {modelEntries.map(([name, m]) => (
+                  <div
+                    key={name}
+                    className={`model-chip ${m.prediction === result.prediction ? "top" : ""}`}
+                  >
+                    <span className="chip-dot" />
+                    <span>{name.replace(/_/g, " ")}</span>
+                    <span className="chip-tooltip">
+                      {m.prediction} · {m.confidence.toFixed(1)}%
+                    </span>
+                  </div>
+                ))}
+              </div>
               <ModelChart perModel={result.per_model} />
             </div>
           </div>

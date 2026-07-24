@@ -13,7 +13,7 @@ export default function UploadPanel({ file, previewUrl, onFile, onClear, onPredi
   };
 
   return (
-    <div className="upload-panel">
+    <div className="panel">
       <div className="panel-title">
         <span>Specimen input</span>
         <span>{file ? file.name : "AWAITING FILE"}</span>
@@ -31,7 +31,7 @@ export default function UploadPanel({ file, previewUrl, onFile, onClear, onPredi
           <span className="frame-corner fc-bl" />
           <span className="frame-corner fc-br" />
           <div className="fp-idle-icon">
-            <FingerprintScan state="idle" />
+            <FingerprintScan state="idle" size={80} />
           </div>
           <div className="cta">Drop a fingerprint image, or click to browse</div>
           <div className="hint">PNG · JPG · BMP · TIF — MAX 8MB</div>
@@ -49,7 +49,7 @@ export default function UploadPanel({ file, previewUrl, onFile, onClear, onPredi
             <>
               <div className="scan-line" />
               <div className="fp-overlay">
-                <FingerprintScan state="scanning" progress={0.6} />
+                <FingerprintScan state="scanning" size={64} />
               </div>
             </>
           )}

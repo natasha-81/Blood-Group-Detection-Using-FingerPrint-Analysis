@@ -6,25 +6,70 @@ const RIDGE_PATHS = [
   "M60 36c-6 0-8 5-8 10v26c0 8-6 12-6 22 0 6 6 12 12 12",
 ];
 
-export default function FingerprintScan({ state = "idle", progress = 0 }) {
-  // state: idle | scanning | done
+/**
+ * Signature visual: fingerprint ridges that, once a prediction lands ("done"),
+ * cross-fade into a DNA double-helix — the shared thread between dermatoglyphic
+ * texture and the genetic basis of blood type.
+ */
+export default function FingerprintScan({ state = "idle", size = 72 }) {
+  const height = size * (140 / 120);
   return (
-    <svg viewBox="0 0 120 140" width="72" height="84" className={`fp-svg fp-${state}`}>
-      {RIDGE_PATHS.map((d, i) => (
+    <svg
+      viewBox="0 0 120 140"
+      width={size}
+      height={height}
+      className={`fp-svg fp-${state}`}
+      aria-hidden="true"
+    >
+      <g style={{ opacity: state === "done" ? 0 : 1, transition: "opacity 0.5s ease" }}>
+        {RIDGE_PATHS.map((d, i) => (
+          <path
+            key={i}
+            d={d}
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="3"
+            strokeLinecap="round"
+            className="fp-ridge"
+            style={{ animationDelay: `${i * 0.12}s` }}
+          />
+        ))}
+        {state === "scanning" && (
+          <rect x="0" y="4" width="120" height="3" className="fp-beam" />
+        )}
+      </g>
+
+      <g style={{ opacity: state === "done" ? 1 : 0, transition: "opacity 0.5s ease 0.15s" }}>
         <path
-          key={i}
-          d={d}
+          d="M40 8 C40 30, 80 30, 80 52 C80 74, 40 74, 40 96 C40 118, 80 118, 80 132"
           fill="none"
           stroke="currentColor"
           strokeWidth="3"
           strokeLinecap="round"
-          className="fp-ridge"
-          style={{ animationDelay: `${i * 0.12}s` }}
+          className="helix-path"
         />
-      ))}
-      {state === "scanning" && (
-        <rect x="0" y={140 * (1 - progress)} width="120" height="3" className="fp-beam" />
-      )}
+        <path
+          d="M80 8 C80 30, 40 30, 40 52 C40 74, 80 74, 80 96 C80 118, 40 118, 40 132"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="3"
+          strokeLinecap="round"
+          className="helix-path"
+          style={{ animationDelay: "0.1s" }}
+        />
+        {[18, 40, 62, 84, 106, 128].map((y, i) => (
+          <line
+            key={y}
+            x1={i % 2 === 0 ? 44 : 76}
+            y1={y}
+            x2={i % 2 === 0 ? 76 : 44}
+            y2={y}
+            stroke="currentColor"
+            strokeWidth="2"
+            opacity="0.5"
+          />
+        ))}
+      </g>
     </svg>
   );
 }
