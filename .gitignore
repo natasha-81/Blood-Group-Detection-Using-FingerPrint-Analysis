@@ -1,0 +1,30 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.env
+
+# --- Model artifacts (large binaries, see backend/models/README.md) ---
+backend/models/*.pkl
+backend/models/*.pth
+backend/models/*.npy
+!backend/models/README.md
+
+# --- Node / frontend ---
+frontend/node_modules/
+frontend/dist/
+frontend/.env
+frontend/.env.local
+
+# --- OS / editor ---
+.DS_Store
+.vscode/
+.idea/
+
+# --- Notebook checkpoints ---
+.ipynb_checkpoints/
+
+# --- Misc training outputs kept out of the repo root ---
+*.log
