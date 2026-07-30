@@ -1,4 +1,4 @@
-# Blood Group Prediction from Fingerprint Ridge Texture
+# Blood Group Prediction from Fingerprint Ridge Texture Analysis
 **🔗 Live demo:** https://blood-group-detection-using-finger.vercel.app
 
 A research/portfolio project that predicts ABO/Rh blood group (8 classes: A+, A-, B+,
